@@ -2,16 +2,16 @@
 const mongoose = require('mongoose')
 
 
-const ExcerciseRecord  = new mongoose.Schema(
+const ExcerciseRecordModel = new mongoose.Schema(
     {
         name: String,
-        weight: String,
-        repeatsNumber: String,
+        weight: Number,
+        repeatsNumber: Number,
 
     },
     { timestamps: true }
     //data utworzenia 
 )
 
-module.exports = mongoose.model('ExcerciseRecord ', ExcerciseRecord )
+module.exports = mongoose.model('ExcerciseRecordModel ', ExcerciseRecordModel)
 // nazwa naszej kolekcj ExerciseModel(liczbapojdyncza) a po prfzecinki schemat naszje kolekcji 
