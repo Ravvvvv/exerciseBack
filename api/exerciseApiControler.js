@@ -26,8 +26,20 @@ module.exports = {
 
 
     },
-    create:(req,res)=>{
-        const newExercises= new Exercises({...})
+    create: (req, res) => {
+        const newExercise = new ExcerciseRecord({
+            name: req.body.name,
+            weight: req.body.weight,
+            repeatsNumber: req.body.repeatsNumber,
+        });
+        newExercise.save()
+            .then((exercise) => {
+                res.status(201).json(exercise); // Zwróć utworzony obiekt
+            })
+            .catch((err) => {
+                res.status(400).json({ error: 'nie dziala' }); // Obsłuż błąd i zwróć błąd 400
+            });
+
     }
 
 

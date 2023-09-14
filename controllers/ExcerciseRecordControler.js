@@ -6,7 +6,7 @@ module.exports = {
     ExcerciseRecord.find({})
       .lean()
       .then((exercises) => {
-        res.render('/exerciseViews', exercises, exercises)
+        res.render('exerciseViews', exercises, exercises)
       })
       .catch((err) => {
         res.send(err)
