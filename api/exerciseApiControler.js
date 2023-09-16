@@ -1,47 +1,34 @@
-const ExcerciseRecordControler = require('../controllers/ExcerciseRecordControler')
-
+const ExcerciseRecord = require("../models/ExerciseModel");
 
 module.exports = {
-    index: (req, res) => {
-        ExcerciseRecord.find({})
-            .lean()
-            .then((exercises) => {
-                res.satus(200).json(exercises)
-            })
-            .catch((err) => {
-                res.satus(500).json({ error: err });
-            });
+  index: (req, res) => {
 
+    const query = req.body.name ? { name: req.body.name } : {}
 
-    },
-    create: (req, res) => {
-        ExcerciseRecord.find({})
-            .lean()
-            .then((exercises) => {
-                res.satus(200).json(exercises)
-            })
-            .catch((err) => {
-                res.satus(404).json({ error: 'error 404' });
-            });
+    ExcerciseRecord.find(query)
+      .lean()
+      .then((exercises) => {
+        res.status(200).json(exercises);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
+  },
 
-
-    },
-    create: (req, res) => {
-        const newExercise = new ExcerciseRecord({
-            name: req.body.name,
-            weight: req.body.weight,
-            repeatsNumber: req.body.repeatsNumber,
-        });
-        newExercise.save()
-            .then((exercise) => {
-                res.status(201).json(exercise); // Zwróć utworzony obiekt
-            })
-            .catch((err) => {
-                res.status(400).json({ error: 'nie dziala' }); // Obsłuż błąd i zwróć błąd 400
-            });
-
-    }
-
-
-
+  create: (req, res) => {
+    const newExercise = new ExcerciseRecord({
+      name: req.body.name,
+      weight: req.body.weight,
+      repeatsNumber: req.body.repeatsNumber,
+    });
+    
+    newExercise
+      .save()
+      .then((exercise) => {
+        res.status(201).json(exercise); // Zwróć utworzony obiekt
+      })
+      .catch((err) => {
+        res.status(400).json({ error: "nie dziala" }); // Obsłuż błąd i zwróć błąd 400
+      });
+  },
 };
